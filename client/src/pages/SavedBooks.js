@@ -8,7 +8,6 @@ import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   const [deleteBook]= useMutation(REMOVE_BOOK)  
-  
   let userData;
   const {loading, error, data} = useQuery(GET_ME, {pollInterval: 100});
   if (loading) return 'Loading...';
@@ -16,7 +15,6 @@ const SavedBooks = () => {
   if(!loading && !error){
     userData = data.me
   }
-  
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
@@ -25,7 +23,6 @@ const SavedBooks = () => {
     deleteBook({variables: {bookId: bookId}, token})
     removeBookId(bookId);
   }
-
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
